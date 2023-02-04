@@ -1,26 +1,37 @@
 package com.example.rockpaperscissorsweb.model;
 
-import lombok.*;
+import com.example.rockpaperscissorsweb.annotation.Default;
 
 import java.util.Objects;
 
-public class Game {
-    private int lastRound;
-    private Score score;
-    private int maxRound;
+public final class Game {
+    private final int lastRound;
+    private final Score score;
+    private final int maxRound;
 
-    public Game(int lastRound, Score score, int maxRound) {
+    @Default
+    public Game(final int lastRound, final Score score, final int maxRound) {
         this.lastRound = lastRound;
-        this.score = score;
+        this.score = new Score(score);
         this.maxRound = maxRound;
     }
 
-    public int nextRound() {
-        return ++lastRound;
+    public Game(final Game game) {
+        this.lastRound = game.getLastRound();
+        this.score = new Score(game.getScore());
+        this.maxRound = game.getMaxRound();
     }
 
-    public boolean isFinishedRound() {
-        return (maxRound - lastRound) <= 0;
+    public int getLastRound() {
+        return lastRound;
+    }
+
+    public Score getScore() {
+        return new Score(score);
+    }
+
+    public int getMaxRound() {
+        return maxRound;
     }
 
     @Override
@@ -36,15 +47,12 @@ public class Game {
         return Objects.hash(lastRound, score, maxRound);
     }
 
-    public int getLastRound() {
-        return lastRound;
-    }
-
-    public Score getScore() {
-        return score;
-    }
-
-    public int getMaxRound() {
-        return maxRound;
+    @Override
+    public String toString() {
+        return "Game{" +
+                "lastRound=" + lastRound +
+                ", score=" + score +
+                ", maxRound=" + maxRound +
+                '}';
     }
 }

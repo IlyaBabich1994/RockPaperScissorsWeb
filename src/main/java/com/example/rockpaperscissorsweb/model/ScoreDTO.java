@@ -1,19 +1,24 @@
 package com.example.rockpaperscissorsweb.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.example.rockpaperscissorsweb.annotation.Default;
 
 import java.util.Objects;
-@NoArgsConstructor
-public class ScoreDTO {
-    private int scoreComp;
-    private int tie;
-    private int scorePlayer;
 
-    public ScoreDTO(int scoreComp, int tie, int scorePlayer) {
+public final class ScoreDTO {
+    private final int scoreComp;
+    private final int tie;
+    private final int scorePlayer;
+    @Default
+    public ScoreDTO(final int scoreComp, final int tie, final int scorePlayer) {
         this.scoreComp = scoreComp;
         this.tie = tie;
         this.scorePlayer = scorePlayer;
+    }
+
+    public ScoreDTO(final ScoreDTO scoreDTO) {
+        this.scoreComp = scoreDTO.getScoreComp();
+        this.tie = scoreDTO.getTie();
+        this.scorePlayer = scoreDTO.getScorePlayer();
     }
 
     public int getScoreComp() {
@@ -27,6 +32,7 @@ public class ScoreDTO {
     public int getScorePlayer() {
         return scorePlayer;
     }
+
     @Override
     public String toString() {
         return "ScoreDTO{" +

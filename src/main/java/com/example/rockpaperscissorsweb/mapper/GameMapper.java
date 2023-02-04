@@ -5,7 +5,6 @@ import com.example.rockpaperscissorsweb.model.GameDTO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
@@ -14,5 +13,5 @@ public interface GameMapper {
     @Mapping(target = "lastRound", source = "lastRound")
     @Mapping(target = "score", source = "score")
     @Mapping(target = "maxRound", source = "maxRound")
-    public GameDTO toGameDTO(Game game);
+    GameDTO toGameDTO(Game game);
 }

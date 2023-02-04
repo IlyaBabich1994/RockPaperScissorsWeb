@@ -1,27 +1,32 @@
 package com.example.rockpaperscissorsweb.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.example.rockpaperscissorsweb.annotation.Default;
 
 import java.util.Objects;
 
 
 public final class Score {
-    private int scoreComp = 0;
-    private int tie = 0;
-    private int scorePlayer = 0;
+    private final int scoreComp;
+    private final int tie;
+    private final int scorePlayer;
 
-    public Score defineWinner(RockPaperScissors player, RockPaperScissors computer) {
-        if(player.whoIsStrengether(computer) > 0) {
-            scorePlayer++;
-        } else if (player.whoIsStrengether(computer) < 0) {
-            scoreComp++;
-        } else {
-            tie++;
-        }
-        return this;
+    public Score() {
+        this.scoreComp = 0;
+        this.tie = 0;
+        this.scorePlayer = 0;
+    }
+
+    public Score(final Score score) {
+        this.scoreComp = score.getScoreComp();
+        this.tie = score.getTie();
+        this.scorePlayer = score.getScorePlayer();
+    }
+
+    @Default
+    public Score(final int scoreComp, final int tie, final int scorePlayer) {
+        this.scoreComp = scoreComp;
+        this.tie = tie;
+        this.scorePlayer = scorePlayer;
     }
 
     @Override

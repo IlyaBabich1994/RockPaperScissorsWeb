@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping()
 public class GameController {
 
     private final GameService gameService;
@@ -27,19 +27,19 @@ public class GameController {
     }
 
     @GetMapping("/start")
-    public ResponseEntity<GameDTO> startNewGame(){
+    public ResponseEntity<GameDTO> startNewGame() {
         GameDTO gameDTO = gameMapper.toGameDTO(gameService.startNewGame());
         return new ResponseEntity<>(gameDTO, HttpStatus.OK);
     }
 
     @GetMapping("/nextRound")
-    public ResponseEntity<GameDTO> nextRound(@RequestParam String choice){
+    public ResponseEntity<GameDTO> nextRound(@RequestParam String choice) {
         GameDTO gameDTO = gameMapper.toGameDTO(gameService.playRound(choice));
         return new ResponseEntity<>(gameDTO, HttpStatus.OK);
     }
 
     @GetMapping("/finish")
-    public ResponseEntity<ScoreDTO> finishGame(){
+    public ResponseEntity<ScoreDTO> finishGame() {
         ScoreDTO scoreDTO = scoreMapper.toScoreDTO(gameService.finishGame());
         return new ResponseEntity<>(scoreDTO, HttpStatus.OK);
     }
